@@ -3,6 +3,39 @@ import pickle
 import pandas as pd
 import requests
 
+# Apply custom styling with HTML/CSS
+st.write(
+    """
+    <style>
+    body {
+        background-image: url('https://img.freepik.com/premium-photo/crop-clapperboard-black-background_23-2147698844.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .header {
+        font-size: 36px;
+        font-weight: bold;
+        color: #3366cc;
+        margin-bottom: 20px;
+    }
+    .button {
+        background-color: #3366cc;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+st.markdown('<p class="header">Discover Your Next Movie!</p>', unsafe_allow_html=True)
+
+
 def fetch_movie_trailer(movie_id):
     response = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=8265bd1679663a7ea12ac168da84d2e8')
     data = response.json()
@@ -57,24 +90,25 @@ if st.button('Recommend'):
         st.text(names[0])
         st.image(posters[0])
         st.write(descriptions[0])
-        st.write(trailers[0])
+        st.video(trailers[0])
+
     with col2:
         st.text(names[1])
         st.image(posters[1])
         st.write(descriptions[1])
-        st.write(trailers[1])
+        st.video(trailers[1])
     with col3:
         st.text(names[2])
         st.image(posters[2])
         st.write(descriptions[2])
-        st.write(trailers[2])
+        st.video(trailers[2])
     with col4:
         st.text(names[3])
         st.image(posters[3])
         st.write(descriptions[3])
-        st.write(trailers[3])
+        st.video(trailers[3])
     with col5:
         st.text(names[4])
         st.image(posters[4])
         st.write(descriptions[4])
-        st.write(trailers[4])
+        st.video(trailers[4])
