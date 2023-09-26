@@ -4,22 +4,60 @@ import pandas as pd
 import requests
 
 # Apply custom styling with HTML/CSS
-st.write(
+
+st.markdown(
     """
     <style>
-    body {
-        background-image: url('https://img.freepik.com/premium-photo/crop-clapperboard-black-background_23-2147698844.jpg');
+    .stApp {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUSkHGzZdjC5ZmP9k694FXwRDPctXvoKu_OWC0gag1&s');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        
     }
-    .header {
-        font-size: 36px;
+    
+    .ezrtsby2{
+     background-color : gray;
+     color:white; 
+    }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .navbar-brand {
+        font-size: 50px;
         font-weight: bold;
-        color: #3366cc;
-        margin-bottom: 20px;
+        color: red;
+        position: absolute;
+        top: -144px;
     }
-    .button {
+    }
+    .navbar-links {
+        display: flex;
+        left: 625px;
+        top: -157px;
+        
+    }
+    .navbar-link {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 20px; /* Add some spacing between links */
+        
+    }
+    .movie-title-frame {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 20px 0;
+        padding-top: 20px;
+    }
+    .recommend-button {
         background-color: #3366cc;
         color: white;
         padding: 10px 20px;
@@ -27,10 +65,47 @@ st.write(
         border-radius: 5px;
         cursor: pointer;
     }
+    .header{
+        color: blue;
+        font-weight:bold;
+        font-size: 40px;
+        top:15px;
+    }
+    .movie-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    .movie-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .movie-description {
+        margin-bottom: 10px;
+    }
+    .movie-trailer {
+        margin-top: 10px;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+# ...
+
+# Streamlit app layout
+st.markdown('<div class="navbar">', unsafe_allow_html=True)
+st.markdown('<div class="movie-title-frame">', unsafe_allow_html=True)
+st.markdown('<div class="navbar-brand">MOVIREC</div>', unsafe_allow_html=True)
+st.markdown('<div class="navbar-links">', unsafe_allow_html=True)
+# Add navigation links or buttons here
+# st.markdown('<a class="navbar-link" href="#about">About</a>', unsafe_allow_html=True)
+# st.markdown('<a class="navbar-link" href="#contact">Contact</a>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 st.markdown('<p class="header">Discover Your Next Movie!</p>', unsafe_allow_html=True)
@@ -81,7 +156,7 @@ movies = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('similarity.pkl','rb'))
 st.title('Movie Recommender System')
 selected_movie_name = st.selectbox(
-    'Give some movie here',
+    'CHOOSE YOUR MOVIE:',
     movies['title'].values)
 if st.button('Recommend'):
     names,posters,descriptions,trailers = recommend(selected_movie_name)
